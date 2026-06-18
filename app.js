@@ -1,13 +1,3 @@
-process.on('uncaughtException', (err) => {
-  console.error('ERRO GRAVE:', err.message);
-  console.error(err.stack);
-});
-
-process.on('unhandledRejection', (err) => {
-  console.error('ERRO PROMESSA:', err.message);
-  console.error(err.stack);
-});
-
 const express = require('express');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -32,15 +22,16 @@ app.use(flash());
 
 app.use('/auth', require('./routes/auth'));
 app.use('/dashboard', require('./routes/dashboard'));
+app.use('/utilizadores', require('./routes/utilizadores'));
 
 app.get('/', (req, res) => {
   res.redirect('/auth/login');
 });
 
 sequelize.authenticate()
-  .then(() => console.log('✅ Base de dados conectada!'))
-  .catch(err => console.error('❌ Erro na base de dados:', err));
+  .then(() => console.log('Base de dados conectada!'))
+  .catch(err => console.error('Erro na base de dados:', err));
 
 app.listen(3000, () => {
-  console.log('🚀 SIGA a correr em http://localhost:3000');
+  console.log('SIGA a correr em http://localhost:3000');
 });
