@@ -1,0 +1,2 @@
+🚀 SIGA a correr em http://localhost:3000
+✅ Base de dados conectada!
