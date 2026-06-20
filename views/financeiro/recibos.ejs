@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>SIGA - Recibos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
+    <div class="container">
+      <span class="navbar-brand">SIGA - Recibos</span>
+      <a href="/financeiro" class="btn btn-outline-light btn-sm">Voltar</a>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <h5 class="mb-3">Lista de Recibos Emitidos</h5>
+
+    <table class="table table-bordered table-hover">
+      <thead style="background-color: #8B0000; color: white;">
+        <tr>
+          <th>#</th>
+          <th>Numero do Recibo</th>
+          <th>ID Pagamento</th>
+          <th>Valor</th>
+          <th>Data de Emissao</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (recibos.length === 0) { %>
+          <tr>
+            <td colspan="5" class="text-center text-muted">Ainda nao ha recibos emitidos</td>
+          </tr>
+        <% } %>
+        <% recibos.forEach(r => { %>
+          <tr>
+            <td><%= r.id %></td>
+            <td><%= r.numero_recibo %></td>
+            <td><%= r.pagamento_id %></td>
+            <td><%= r.valor %> Esc</td>
+            <td><%= new Date(r.data_emissao).toLocaleDateString('pt-PT') %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
