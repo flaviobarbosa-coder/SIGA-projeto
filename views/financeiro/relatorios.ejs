@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>SIGA - Relatorio Financeiro</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
+    <div class="container">
+      <span class="navbar-brand">SIGA - Relatorio Financeiro</span>
+      <a href="/financeiro" class="btn btn-outline-light btn-sm">Voltar</a>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h6 class="text-muted">Total de Pagamentos</h6>
+            <h2><%= totalPagamentos %></h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h6 class="text-muted">Valor Total Recebido</h6>
+            <h2><%= valorTotal %> Esc</h2>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <h6 class="text-muted">Total de Recibos Emitidos</h6>
+            <h2><%= totalRecibos %></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

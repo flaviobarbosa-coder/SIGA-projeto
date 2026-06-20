@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>SIGA - Pagamentos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
+    <div class="container">
+      <span class="navbar-brand">SIGA - Pagamentos</span>
+      <a href="/financeiro" class="btn btn-outline-light btn-sm">Voltar</a>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+
+    <div class="card mb-4">
+      <div class="card-header text-white" style="background-color: #8B0000;">
+        Registar Novo Pagamento
+      </div>
+      <div class="card-body">
+        <form action="/financeiro/pagamentos/criar" method="POST">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">ID do Associado</label>
+              <input type="number" name="associado_id" class="form-control" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Tipo de Pagamento</label>
+              <select name="tipo_pagamento" class="form-select" required>
+                <option value="quota">Quota</option>
+                <option value="inscricao">Inscricao em Atividade</option>
+                <option value="outro">Outro</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Valor</label>
+              <input type="number" step="0.01" name="valor" class="form-control" required>
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button type="submit" class="btn w-100 text-white" style="background-color: #8B0000;">
+                Registar Pagamento
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <h5 class="mb-3">Lista de Pagamentos</h5>
+    <table class="table table-bordered table-hover">
+      <thead style="background-color: #8B0000; color: white;">
+        <tr>
+          <th>#</th>
+          <th>Associado</th>
+          <th>Tipo</th>
+          <th>Valor</th>
+          <th>Estado</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (pagamentos.length === 0) { %>
+          <tr>
+            <td colspan="6" class="text-center text-muted">Ainda nao ha pagamentos registados</td>
+          </tr>
+        <% } %>
+        <% pagamentos.forEach(p => { %>
+          <tr>
+            <td><%= p.id %></td>
+            <td><%= p.associado_id %></td>
+            <td><%= p.tipo_pagamento %></td>
+            <td><%= p.valor %> Esc</td>
+            <td>
+              <span class="badge bg-<%= p.estado === 'pago' ? 'success' : (p.estado === 'pendente' ? 'warning' : 'danger') %>">
+                <%= p.estado %>
+              </span>
+            </td>
+            <td><%= new Date(p.data_pagamento).toLocaleDateString('pt-PT') %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
