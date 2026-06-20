@@ -1,21 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-    <title>Dashboard SIGA</title>
+  <meta charset="UTF-8">
+  <title>SIGA - Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-
-<h1>Dashboard SIGA</h1>
-
-<h3>Total de Associados: 0</h3>
-
-<h3>Associados Ativos: 0</h3>
-
-<h3>Quotas Pagas: 0</h3>
-
-<h3>Quotas em Atraso: 0</h3>
-
-<h3>Atividades Realizadas: 0</h3>
-
+  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
+    <div class="container">
+      <span class="navbar-brand">SIGA - Dashboard</span>
+      <a href="/auth/logout" class="btn btn-outline-light btn-sm">Sair</a>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <h4>Painel de Monitorizacao</h4>
+    <div class="row g-4 mt-2">
+      <div class="col-md-3">
+        <div class="card text-white" style="background-color: #8B0000;">
+          <div class="card-body">
+            <h2><%= totalAssociados %></h2>
+            <p>Total de Associados</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white" style="background-color: #e67e22;">
+          <div class="card-body">
+            <h2><%= quotasPendentes %></h2>
+            <p>Quotas Pendentes</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white" style="background-color: #27ae60;">
+          <div class="card-body">
+            <h2><%= totalAtividades %></h2>
+            <p>Atividades</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white" style="background-color: #2980b9;">
+          <div class="card-body">
+            <h2><%= totalPagamentos %></h2>
+            <p>Pagamentos Confirmados</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
