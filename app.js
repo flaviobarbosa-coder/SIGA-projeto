@@ -23,6 +23,7 @@ app.use(flash());
 app.use('/auth', require('./routes/auth'));
 app.use('/dashboard', require('./routes/dashboard'));
 app.use('/utilizadores', require('./routes/utilizadores'));
+app.use('/atividades', require('./routes/atividades'));
 app.use('/financeiro', require('./routes/financeiro'));
 
 app.get('/', (req, res) => {
