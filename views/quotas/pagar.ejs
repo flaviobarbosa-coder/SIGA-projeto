@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagar Quota - SIGA</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Pagar Quota</h1>
+
+  <p><strong>Periodo:</strong> <%= quota.periodo %></p>
+  <p><strong>Valor:</strong> <%= quota.valor %> EUR</p>
+  <p><strong>Vencimento:</strong> <%= quota.data_vencimento %></p>
+
+  <form action="/quotas/pagamentos" method="POST">
+    <input type="hidden" name="quotaId" value="<%= quota.id %>">
+
+    <label for="valorPago">Valor pago (EUR):</label><br>
+    <input type="number" step="0.01" id="valorPago" name="valorPago" value="<%= quota.valor %>" required><br><br>
+
+    <label for="metodo">Metodo de pagamento:</label><br>
+    <select id="metodo" name="metodo" required>
+      <option value="transferencia">Transferencia bancaria</option>
+      <option value="mb_way">MB WAY</option>
+      <option value="numerario">Numerario</option>
+      <option value="cartao">Cartao</option>
+    </select><br><br>
+
+    <button type="submit">Submeter Pagamento</button>
+  </form>
+
+  <p><a href="/quotas">Voltar</a></p>
+</body>
+</html>

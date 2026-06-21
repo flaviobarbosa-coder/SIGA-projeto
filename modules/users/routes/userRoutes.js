@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+// TESTE SIMPLES (SEM CONTROLLER)
 router.get('/', (req, res) => {
-  res.render('dashboard/index');
+  res.send('USERS ROUTE FUNCIONA PERFEITAMENTE');
 });
 
 module.exports = router;

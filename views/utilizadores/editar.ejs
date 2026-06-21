@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>SIGA - Editar Utilizador</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
+    <div class="container">
+      <span class="navbar-brand">SIGA - Editar Utilizador</span>
+      <a href="/utilizadores" class="btn btn-outline-light btn-sm">Voltar</a>
+    </div>
+  </nav>
+  <div class="container mt-4">
+    <div class="card" style="max-width: 500px; margin: auto;">
+      <div class="card-header text-white" style="background-color: #8B0000;">
+        Editar Utilizador
+      </div>
+      <div class="card-body">
+        <form action="/utilizadores/editar/<%= utilizador.id %>" method="POST">
+          <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" name="nome" class="form-control" value="<%= utilizador.nome %>" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" value="<%= utilizador.email %>" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Perfil</label>
+            <select name="perfil" class="form-select">
+              <option value="admin" <%= utilizador.perfil === 'admin' ? 'selected' : '' %>>Administrador</option>
+              <option value="gestor_associados" <%= utilizador.perfil === 'gestor_associados' ? 'selected' : '' %>>Gestor de Associados</option>
+              <option value="gestor_financeiro" <%= utilizador.perfil === 'gestor_financeiro' ? 'selected' : '' %>>Gestor Financeiro</option>
+              <option value="gestor_atividades" <%= utilizador.perfil === 'gestor_atividades' ? 'selected' : '' %>>Gestor de Atividades</option>
+              <option value="direcao" <%= utilizador.perfil === 'direcao' ? 'selected' : '' %>>Direção</option>
+              <option value="associado" <%= utilizador.perfil === 'associado' ? 'selected' : '' %>>Associado</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <select name="estado" class="form-select">
+              <option value="ativo" <%= utilizador.estado === 'ativo' ? 'selected' : '' %>>Ativo</option>
+              <option value="inativo" <%= utilizador.estado === 'inativo' ? 'selected' : '' %>>Inativo</option>
+              <option value="bloqueado" <%= utilizador.estado === 'bloqueado' ? 'selected' : '' %>>Bloqueado</option>
+            </select>
+          </div>
+          <button type="submit" class="btn w-100 text-white" style="background-color: #8B0000;">
+            Guardar Alterações
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

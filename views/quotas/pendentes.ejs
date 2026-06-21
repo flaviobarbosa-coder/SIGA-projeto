@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagamentos Pendentes - SIGA</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Pagamentos Pendentes de Confirmacao</h1>
+
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Periodo da Quota</th>
+        <th>Valor Pago</th>
+        <th>Metodo</th>
+        <th>Data Submissao</th>
+        <th>Acoes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% pagamentos.forEach(function(p) { %>
+      <tr>
+        <td><%= p.Quota.periodo %></td>
+        <td><%= p.valorPago %> EUR</td>
+        <td><%= p.metodo %></td>
+        <td><%= p.dataSubmissao %></td>
+        <td>
+          <form action="/quotas/pagamentos/<%= p.id %>/confirmar" method="POST" style="display:inline">
+            <button type="submit">Confirmar</button>
+          </form>
+          <form action="/quotas/pagamentos/<%= p.id %>/rejeitar" method="POST" style="display:inline">
+            <input type="text" name="motivo" placeholder="Motivo da rejeicao">
+            <button type="submit">Rejeitar</button>
+          </form>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <p><a href="/quotas">Voltar a Quotas</a></p>
+</body>
+</html>
