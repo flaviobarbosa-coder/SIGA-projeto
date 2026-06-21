@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Candidatura a Associado</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2>Formulário de Candidatura</h2>
+
+  <form action="/associados/submeter" method="POST">
+    <div class="mb-3">
+      <label>Nome Completo</label>
+      <input type="text" name="nome" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Tipo de Associado</label>
+      <select name="tipo" class="form-control" required>
+        <option value="fisica">Pessoa Física</option>
+        <option value="juridica">Pessoa Jurídica</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label>Email</label>
+      <input type="email" name="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label>Telefone</label>
+      <input type="text" name="telefone" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label>NIF</label>
+      <input type="text" name="nif" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label>Morada</label>
+      <input type="text" name="morada" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Submeter Candidatura</button>
+    <a href="/associados/lista" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+</body>
+</html>

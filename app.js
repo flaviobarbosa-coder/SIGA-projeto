@@ -12,7 +12,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(session({
   secret: 'siga-secret-key',
   resave: false,
@@ -25,6 +24,7 @@ app.use('/dashboard', require('./routes/dashboard'));
 app.use('/utilizadores', require('./routes/utilizadores'));
 app.use('/atividades', require('./routes/atividades'));
 app.use('/financeiro', require('./routes/financeiro'));
+app.use('/associados', require('./routes/associados'));
 
 app.get('/', (req, res) => {
   res.redirect('/auth/login');
