@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Quotas - SIGA</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Consultar Quotas</h1>
+
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>Periodo</th>
+        <th>Valor</th>
+        <th>Vencimento</th>
+        <th>Estado</th>
+        <th>Acao</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% quotas.forEach(function(quota) { %>
+      <tr>
+        <td><%= quota.periodo %></td>
+        <td><%= quota.valor %> EUR</td>
+        <td><%= quota.data_vencimento %></td>
+        <td><%= quota.estado %></td>
+        <td>
+          <% if (quota.estado === 'pendente' || quota.estado === 'atrasado') { %>
+          <a href="/quotas/<%= quota.id %>/pagar">Pagar</a>
+          <% } else { %>
+          -
+          <% } %>
+        </td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+  <p><a href="/quotas/pendentes">Ver pagamentos pendentes (Gestao)</a></p>
+  <p><a href="/dashboard">Voltar ao Dashboard</a></p>
+</body>
+</html>

@@ -12,6 +12,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(session({
   secret: 'siga-secret-key',
   resave: false,
@@ -24,6 +25,7 @@ app.use('/dashboard', require('./routes/dashboard'));
 app.use('/utilizadores', require('./routes/utilizadores'));
 app.use('/atividades', require('./routes/atividades'));
 app.use('/financeiro', require('./routes/financeiro'));
+app.use('/quotas', require('./routes/quotas'));
 app.use('/associados', require('./routes/associados'));
 
 app.get('/', (req, res) => {
@@ -31,8 +33,8 @@ app.get('/', (req, res) => {
 });
 
 sequelize.authenticate()
-  .then(() => console.log('Base de dados conectada!'))
-  .catch(err => console.error('Erro na base de dados:', err));
+  .then(function() { console.log('Base de dados conectada'); })
+  .catch(function(err) { console.error('Erro na base de dados:', err); });
 
 app.listen(3000, () => {
   console.log('SIGA a correr em http://localhost:3000');
