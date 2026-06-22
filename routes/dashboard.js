@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const ctrl = require('../controllers/dashboardController');
 
-router.get('/', (req, res) => {
-  res.render('dashboard/index');
-});
+router.get('/', ctrl.index);
 
 module.exports = router;

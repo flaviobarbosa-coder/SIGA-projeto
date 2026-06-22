@@ -10,27 +10,28 @@ exports.mostrarLogin = (req, res) => {
 
 exports.fazerLogin = async (req, res) => {
   const { email, password } = req.body;
-  console.log('1. Tentativa de login:', email);
   try {
     const utilizador = await Utilizador.findOne({ where: { email } });
-    console.log('2. Utilizador encontrado:', utilizador ? 'sim' : 'nao');
     if (!utilizador) {
       req.flash('erro', 'Email ou password incorretos!');
       return res.redirect('/auth/login');
     }
-    console.log('3. Estado:', utilizador.estado);
     if (utilizador.estado === 'bloqueado') {
-      req.flash('erro', 'Conta bloqueada!');
+      req.flash('erro', 'Conta bloqueada! Contacte o administrador.');
       return res.redirect('/auth/login');
     }
-    console.log('4. A verificar password...');
     const passwordCorreta = await bcrypt.compare(password, utilizador.password);
-    console.log('5. Password correta:', passwordCorreta);
     if (!passwordCorreta) {
-      req.flash('erro', 'Password incorreta!');
+      const tentativas = utilizador.tentativas_login + 1;
+      if (tentativas >= 3) {
+        await utilizador.update({ estado: 'bloqueado', tentativas_login: tentativas });
+        req.flash('erro', 'Conta bloqueada apos 3 tentativas!');
+      } else {
+        await utilizador.update({ tentativas_login: tentativas });
+        req.flash('erro', 'Password incorreta! Tentativa ' + tentativas + ' de 3');
+      }
       return res.redirect('/auth/login');
     }
-    console.log('6. A criar sessao...');
     await utilizador.update({ tentativas_login: 0 });
     req.session.utilizador = {
       id: utilizador.id,
@@ -38,18 +39,17 @@ exports.fazerLogin = async (req, res) => {
       email: utilizador.email,
       perfil: utilizador.perfil
     };
-    console.log('7. Perfil:', utilizador.perfil);
     switch (utilizador.perfil) {
-      case 'admin': return res.redirect('/utilizadores');
-      case 'gestor_associados': return res.redirect('/associados');
-      case 'gestor_financeiro': return res.redirect('/financeiro');
-      case 'gestor_atividades': return res.redirect('/atividades');
+      case 'admin': return res.redirect('/dashboard');
+      case 'gestor_associados': return res.redirect('/dashboard');
+      case 'gestor_financeiro': return res.redirect('/dashboard');
+      case 'gestor_atividades': return res.redirect('/dashboard');
       case 'direcao': return res.redirect('/dashboard');
-      case 'associado': return res.redirect('/associados/portal');
-      default: return res.redirect('/');
+      case 'associado': return res.redirect('/dashboard');
+      default: return res.redirect('/dashboard');
     }
   } catch (err) {
-    console.error('ERRO COMPLETO:', err);
+    console.error('ERRO:', err.message);
     req.flash('erro', 'Erro: ' + err.message);
     res.redirect('/auth/login');
   }

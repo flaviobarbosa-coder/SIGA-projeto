@@ -20,6 +20,13 @@ app.use(session({
 }));
 app.use(flash());
 
+app.use((req, res, next) => {
+  res.locals.utilizador = req.session.utilizador || null;
+  res.locals.sucesso = req.flash('sucesso');
+  res.locals.erro = req.flash('erro');
+  next();
+});
+
 app.use('/auth', require('./routes/auth'));
 app.use('/dashboard', require('./routes/dashboard'));
 app.use('/utilizadores', require('./routes/utilizadores'));
