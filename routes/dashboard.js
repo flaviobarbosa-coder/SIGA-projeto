@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const ctrl = require('../controllers/dashboardController');
+const dashboardController = require('../controllers/dashboardController');
 
-router.get('/', ctrl.index);
+router.get('/', dashboardController.index);
 
 module.exports = router;
