@@ -1,174 +1,246 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIGA - Dashboard</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <style>
-    body { background-color: #f5f5f5; }
-    .card-kpi { border-left: 4px solid #8B0000; border-radius: 8px; }
-    .card-kpi:hover { transform: translateY(-3px); transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-    .kpi-icon { font-size: 2.5rem; }
-    .sidebar { background-color: #8B0000; min-height: 100vh; padding-top: 20px; }
-    .sidebar a { color: white; text-decoration: none; display: block; padding: 12px 20px; border-radius: 8px; margin: 4px 10px; }
-    .sidebar a:hover { background-color: rgba(255,255,255,0.2); }
-    .sidebar a.active { background-color: rgba(255,255,255,0.3); }
-    .main-content { padding: 30px; }
-    .logo-area { text-align: center; padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); margin-bottom: 20px; }
-    .logo-text { color: white; font-size: 1.8rem; font-weight: bold; }
-    .logo-sub { color: rgba(255,255,255,0.7); font-size: 0.8rem; }
-  </style>
+  <title>SIGA — Dashboard</title>
+  <link rel="stylesheet" href="/css/siga-shared.css">
 </head>
 <body>
-  <div class="d-flex">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar" style="width: 250px; min-width: 250px;">
-      <div class="logo-area">
-        <div class="logo-text">🏛️ SIGA</div>
-        <div class="logo-sub">Sistema de Gestão de Associados</div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
       </div>
-
-      <% if (locals.utilizador) { %>
-        <a href="/dashboard" class="active">📊 Dashboard</a>
-
-        <% if (['admin','gestor_associados'].includes(locals.utilizador.perfil)) { %>
-          <a href="/associados">🤝 Associados</a>
-        <% } %>
-
-        <% if (['admin','gestor_financeiro'].includes(locals.utilizador.perfil)) { %>
-          <a href="/quotas">💰 Quotas</a>
-          <a href="/financeiro">🧾 Financeiro</a>
-        <% } %>
-
-        <% if (['admin','gestor_atividades'].includes(locals.utilizador.perfil)) { %>
-          <a href="/atividades">📅 Atividades</a>
-        <% } %>
-
-        <% if (['admin'].includes(locals.utilizador.perfil)) { %>
-          <a href="/utilizadores">👥 Utilizadores</a>
-        <% } %>
-
-        <hr style="border-color: rgba(255,255,255,0.2);">
-        <a href="/auth/logout">🚪 Sair</a>
-      <% } %>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestão de Associados</span>
+      </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content w-100">
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link active">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Dashboard
+      </a>
+      <a href="/associados" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m6 5.87a4 4 0 10-8 0m12-8a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        Associados
+      </a>
+      <a href="/quotas" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Quotas
+      </a>
+      <a href="/financeiro" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Financeiro
+      </a>
+      <a href="/atividades" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        Atividades
+      </a>
+      <a href="/utilizadores" class="nav-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Utilizadores
+      </a>
+    </nav>
 
-      <!-- HEADER -->
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-          <h3 class="mb-0">Dashboard</h3>
-          <small class="text-muted">Bem-vindo, <%= locals.utilizador ? locals.utilizador.nome : '' %>!</small>
-        </div>
-        <div class="text-muted">
-          <small>📅 <%= new Date().toLocaleDateString('pt-PT') %></small>
-        </div>
-      </div>
-
-      <!-- KPIs -->
-      <div class="row g-4 mb-4">
-        <div class="col-md-3">
-          <div class="card card-kpi p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <div class="text-muted small">Total Associados</div>
-                <div class="fs-3 fw-bold text-danger"><%= totalAssociados || 0 %></div>
-              </div>
-              <div class="kpi-icon">🤝</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card card-kpi p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <div class="text-muted small">Quotas Pagas</div>
-                <div class="fs-3 fw-bold text-success"><%= quotasPagas || 0 %></div>
-              </div>
-              <div class="kpi-icon">💰</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card card-kpi p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <div class="text-muted small">Atividades</div>
-                <div class="fs-3 fw-bold text-primary"><%= totalAtividades || 0 %></div>
-              </div>
-              <div class="kpi-icon">📅</div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="card card-kpi p-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <div class="text-muted small">Utilizadores</div>
-                <div class="fs-3 fw-bold text-warning"><%= totalUtilizadores || 0 %></div>
-              </div>
-              <div class="kpi-icon">👥</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ACESSO RAPIDO -->
-      <div class="row g-4">
-        <div class="col-12">
-          <h5 class="mb-3">Acesso Rápido</h5>
-        </div>
-        <% if (['admin','gestor_associados'].includes(locals.utilizador ? locals.utilizador.perfil : '')) { %>
-          <div class="col-md-4">
-            <div class="card p-3 text-center" style="cursor:pointer;" onclick="location.href='/associados'">
-              <div style="font-size:2rem;">🤝</div>
-              <div class="fw-bold mt-2">Gestão de Associados</div>
-              <small class="text-muted">Ver e gerir associados</small>
-            </div>
-          </div>
-        <% } %>
-        <% if (['admin','gestor_financeiro'].includes(locals.utilizador ? locals.utilizador.perfil : '')) { %>
-          <div class="col-md-4">
-            <div class="card p-3 text-center" style="cursor:pointer;" onclick="location.href='/financeiro'">
-              <div style="font-size:2rem;">🧾</div>
-              <div class="fw-bold mt-2">Controlo Financeiro</div>
-              <small class="text-muted">Recibos e pagamentos</small>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card p-3 text-center" style="cursor:pointer;" onclick="location.href='/quotas'">
-              <div style="font-size:2rem;">💰</div>
-              <div class="fw-bold mt-2">Gestão de Quotas</div>
-              <small class="text-muted">Ver e gerir quotas</small>
-            </div>
-          </div>
-        <% } %>
-        <% if (['admin','gestor_atividades'].includes(locals.utilizador ? locals.utilizador.perfil : '')) { %>
-          <div class="col-md-4">
-            <div class="card p-3 text-center" style="cursor:pointer;" onclick="location.href='/atividades'">
-              <div style="font-size:2rem;">📅</div>
-              <div class="fw-bold mt-2">Gestão de Atividades</div>
-              <small class="text-muted">Ver e gerir atividades</small>
-            </div>
-          </div>
-        <% } %>
-        <% if (['admin'].includes(locals.utilizador ? locals.utilizador.perfil : '')) { %>
-          <div class="col-md-4">
-            <div class="card p-3 text-center" style="cursor:pointer;" onclick="location.href='/utilizadores'">
-              <div style="font-size:2rem;">👥</div>
-              <div class="fw-bold mt-2">Gestão de Utilizadores</div>
-              <small class="text-muted">Ver e gerir utilizadores</small>
-            </div>
-          </div>
-        <% } %>
-      </div>
-
+    <div class="sidebar-footer">
+      <a href="/auth/logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6a2 2 0 012 2v1"/>
+        </svg>
+        Sair
+      </a>
     </div>
-  </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Visão Geral</p>
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Bem-vindo de volta, <%= locals.utilizador ? locals.utilizador.nome : 'Utilizador' %>.</p>
+      </div>
+      <div class="page-header-actions">
+        <span style="font-size:13px; color:var(--clr-muted);">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <%= new Date().toLocaleDateString('pt-PT', {day:'numeric', month:'long', year:'numeric'}) %>
+        </span>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card blue">
+        <div class="kpi-top">
+          <div class="kpi-icon blue">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m6 5.87a4 4 0 10-8 0m12-8a4 4 0 11-8 0 4 4 0 018 0z"/>
+            </svg>
+          </div>
+          <span class="kpi-badge neutral">— 0%</span>
+        </div>
+        <p class="kpi-label">Total de Associados</p>
+        <p class="kpi-value"><%= typeof totalAssociados !== 'undefined' ? totalAssociados : 0 %></p>
+        <p class="kpi-context">Nenhum registo este mês</p>
+      </div>
+
+      <div class="kpi-card teal">
+        <div class="kpi-top">
+          <div class="kpi-icon teal">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <span class="kpi-badge neutral">— 0%</span>
+        </div>
+        <p class="kpi-label">Quotas Pagas</p>
+        <p class="kpi-value"><%= typeof totalQuotas !== 'undefined' ? totalQuotas : 0 %></p>
+        <p class="kpi-context">Sem pagamentos registados</p>
+      </div>
+
+      <div class="kpi-card amber">
+        <div class="kpi-top">
+          <div class="kpi-icon amber">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <span class="kpi-badge neutral">— 0%</span>
+        </div>
+        <p class="kpi-label">Atividades</p>
+        <p class="kpi-value"><%= typeof totalAtividades !== 'undefined' ? totalAtividades : 0 %></p>
+        <p class="kpi-context">Nenhuma atividade agendada</p>
+      </div>
+
+      <div class="kpi-card maroon">
+        <div class="kpi-top">
+          <div class="kpi-icon maroon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <span class="kpi-badge info"><%= typeof totalUtilizadores !== 'undefined' ? totalUtilizadores : 0 %> ativos</span>
+        </div>
+        <p class="kpi-label">Utilizadores</p>
+        <p class="kpi-value"><%= typeof totalUtilizadores !== 'undefined' ? totalUtilizadores : 0 %></p>
+        <p class="kpi-context">Todos com acesso atribuído</p>
+      </div>
+    </div>
+
+    <!-- ACESSO RÁPIDO -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+      <h2 class="card-title">Acesso Rápido</h2>
+      <span style="font-size:12.5px; color:var(--clr-muted);">Atalhos para as áreas principais</span>
+    </div>
+
+    <div class="quick-links">
+      <a href="/associados" class="quick-link">
+        <div class="quick-link-icon" style="background:#EFF6FF; color:#3B82F6;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m6 5.87a4 4 0 10-8 0m12-8a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        </div>
+        <div class="quick-link-text">
+          <strong>Gestão de Associados</strong>
+          <span>Ver e gerir associados</span>
+        </div>
+        <div class="quick-link-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/financeiro" class="quick-link">
+        <div class="quick-link-icon" style="background:#ECFDF5; color:#2E7D5B;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <div class="quick-link-text">
+          <strong>Controlo Financeiro</strong>
+          <span>Recibos e pagamentos</span>
+        </div>
+        <div class="quick-link-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/quotas" class="quick-link">
+        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="quick-link-text">
+          <strong>Gestão de Quotas</strong>
+          <span>Ver e gerir quotas</span>
+        </div>
+        <div class="quick-link-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/atividades" class="quick-link">
+        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div class="quick-link-text">
+          <strong>Gestão de Atividades</strong>
+          <span>Ver e gerir atividades</span>
+        </div>
+        <div class="quick-link-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/utilizadores" class="quick-link">
+        <div class="quick-link-icon" style="background:#FFF1F2; color:#7A1F2B;">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <div class="quick-link-text">
+          <strong>Gestão de Utilizadores</strong>
+          <span>Ver e gerir utilizadores</span>
+        </div>
+        <div class="quick-link-arrow">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </main>
+
 </body>
 </html>
