@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGA - Log de Auditoria</title>
+  <link rel="stylesheet" href="/css/siga-shared.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
+      </div>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestao de Associados</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/associados" class="nav-link">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link active">Utilizadores</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/auth/logout">Sair</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Utilizadores</p>
+        <h1 class="page-title">Log de Auditoria</h1>
+        <p class="page-subtitle">Registo de todas as acoes realizadas no sistema.</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="/utilizadores" class="btn btn-outline">← Voltar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Historico de Acoes</h2>
+        <span style="font-size:13px; color:var(--clr-muted);"><%= logs.length %> registos</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Utilizador</th>
+              <th>Acao</th>
+              <th>Data/Hora</th>
+              <th>IP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (logs.length > 0) { %>
+              <% logs.forEach(function(log) { %>
+                <tr>
+                  <td><strong><%= log.id_utilizador || '---' %></strong></td>
+                  <td><%= log.acao || '---' %></td>
+                  <td><%= log.data_hora || '---' %></td>
+                  <td><%= log.ip || '---' %></td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="4" style="text-align:center; color:#888; padding:30px;">Nenhum registo de auditoria</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

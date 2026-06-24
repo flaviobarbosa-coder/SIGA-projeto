@@ -63,3 +63,62 @@ exports.eliminar = async (req, res) => {
     res.send('Erro: ' + err.message);
   }
 };
+
+exports.mostrarRecuperarPassword = (req, res) => {
+  res.render('utilizadores/recuperar-password', {
+    erro: req.flash('erro'),
+    sucesso: req.flash('sucesso')
+  });
+};
+
+exports.recuperarPassword = async (req, res) => {
+  try {
+    const { email, nova_password } = req.body;
+    const utilizador = await Utilizador.findOne({ where: { email } });
+    if (!utilizador) {
+      req.flash('erro', 'Email nao encontrado!');
+      return res.redirect('/utilizadores/recuperar-password');
+    }
+    const hash = await bcrypt.hash(nova_password, 10);
+    await utilizador.update({ 
+      password: hash, 
+      estado: 'ativo',
+      tentativas_login: 0 
+    });
+    req.flash('sucesso', 'Password redefinida com sucesso!');
+    res.redirect('/utilizadores');
+  } catch (err) {
+    req.flash('erro', 'Erro: ' + err.message);
+    res.redirect('/utilizadores/recuperar-password');
+  }
+};
+
+exports.logAuditoria = async (req, res) => {
+  try {
+    const { QueryTypes } = require('sequelize');
+    const sequelize = require('../config/database');
+    const logs = await sequelize.query(
+      'SELECT * FROM log_auditoria ORDER BY data_hora DESC',
+      { type: QueryTypes.SELECT }
+    );
+    res.render('utilizadores/log-auditoria', { logs });
+  } catch (err) {
+    res.send('Erro: ' + err.message);
+  }
+};
+
+exports.registarLog = async (utilizador_id, acao, ip) => {
+  try {
+    const { QueryTypes } = require('sequelize');
+    const sequelize = require('../config/database');
+    await sequelize.query(
+      'INSERT INTO log_auditoria (id_utilizador, acao, ip) VALUES (?, ?, ?)',
+      {
+        replacements: [utilizador_id, acao, ip],
+        type: QueryTypes.INSERT
+      }
+    );
+  } catch (err) {
+    console.error('Erro ao registar log:', err.message);
+  }
+};
