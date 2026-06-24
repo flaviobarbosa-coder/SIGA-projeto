@@ -2,44 +2,75 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIGA - Relatorio Financeiro</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/siga-shared.css">
+  <style>
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
-    <div class="container">
-      <span class="navbar-brand">SIGA - Relatorio Financeiro</span>
-      <a href="/financeiro" class="btn btn-outline-light btn-sm">Voltar</a>
-    </div>
-  </nav>
-
-  <div class="container mt-4">
-    <div class="row g-3">
-      <div class="col-md-4">
-        <div class="card text-center">
-          <div class="card-body">
-            <h6 class="text-muted">Total de Pagamentos</h6>
-            <h2><%= totalPagamentos %></h2>
-          </div>
-        </div>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
       </div>
-      <div class="col-md-4">
-        <div class="card text-center">
-          <div class="card-body">
-            <h6 class="text-muted">Valor Total Recebido</h6>
-            <h2><%= valorTotal %> Esc</h2>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card text-center">
-          <div class="card-body">
-            <h6 class="text-muted">Total de Recibos Emitidos</h6>
-            <h2><%= totalRecibos %></h2>
-          </div>
-        </div>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestao de Associados</span>
       </div>
     </div>
-  </div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/associados" class="nav-link">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link active">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link">Utilizadores</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/auth/logout">Sair</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Financeiro</p>
+        <h1 class="page-title">Relatorio Financeiro</h1>
+        <p class="page-subtitle">Resumo geral de pagamentos e recibos.</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="/financeiro" class="btn btn-outline">← Voltar</a>
+      </div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card blue">
+        <div class="kpi-top">
+          <div class="kpi-icon blue"></div>
+        </div>
+        <p class="kpi-label">Total de Pagamentos</p>
+        <p class="kpi-value"><%= totalPagamentos %></p>
+        <p class="kpi-context">Pagamentos registados</p>
+      </div>
+      <div class="kpi-card teal">
+        <div class="kpi-top">
+          <div class="kpi-icon teal"></div>
+        </div>
+        <p class="kpi-label">Total de Recibos</p>
+        <p class="kpi-value"><%= totalRecibos %></p>
+        <p class="kpi-context">Recibos emitidos</p>
+      </div>
+      <div class="kpi-card maroon">
+        <div class="kpi-top">
+          <div class="kpi-icon maroon"></div>
+        </div>
+        <p class="kpi-label">Valor Total</p>
+        <p class="kpi-value"><%= valorTotal %> CVE</p>
+        <p class="kpi-context">Soma de todos os pagamentos</p>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
