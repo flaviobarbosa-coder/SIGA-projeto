@@ -1,14 +1,12 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIGA — Dashboard</title>
+  <title>SIGA - Dashboard</title>
   <link rel="stylesheet" href="/css/siga-shared.css">
 </head>
 <body>
-
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-brand">
       <div class="sidebar-brand-icon">
@@ -18,229 +16,242 @@
       </div>
       <div class="sidebar-brand-text">
         <strong>SIGA</strong>
-        <span>Gestão de Associados</span>
+        <span>Gestao de Associados</span>
       </div>
     </div>
-
     <nav class="sidebar-nav">
-      <a href="/dashboard" class="nav-link active">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-        </svg>
-        Dashboard
-      </a>
-      <a href="/associados" class="nav-link">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m6 5.87a4 4 0 10-8 0m12-8a4 4 0 11-8 0 4 4 0 018 0z"/>
-        </svg>
-        Associados
-      </a>
-      <a href="/quotas" class="nav-link">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        Quotas
-      </a>
-      <a href="/financeiro" class="nav-link">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-        </svg>
-        Financeiro
-      </a>
-      <a href="/atividades" class="nav-link">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-        </svg>
-        Atividades
-      </a>
-      <a href="/utilizadores" class="nav-link">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        Utilizadores
-      </a>
+      <a href="/dashboard" class="nav-link active">Dashboard</a>
+      <a href="/associados" class="nav-link">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link">Utilizadores</a>
     </nav>
-
     <div class="sidebar-footer">
-      <a href="/auth/logout">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6a2 2 0 012 2v1"/>
-        </svg>
-        Sair
-      </a>
+      <a href="/auth/logout">Sair</a>
     </div>
   </aside>
-
-  <!-- MAIN -->
   <main class="main">
     <div class="page-header">
       <div>
-        <p class="page-eyebrow">Visão Geral</p>
+        <p class="page-eyebrow">Visao Geral</p>
         <h1 class="page-title">Dashboard</h1>
         <p class="page-subtitle">Bem-vindo de volta, <%= locals.utilizador ? locals.utilizador.nome : 'Utilizador' %>.</p>
       </div>
-      <div class="page-header-actions">
-        <span style="font-size:13px; color:var(--clr-muted);">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          <%= new Date().toLocaleDateString('pt-PT', {day:'numeric', month:'long', year:'numeric'}) %>
-        </span>
-      </div>
     </div>
-
-    <!-- KPIs -->
     <div class="kpi-grid">
       <div class="kpi-card blue">
         <div class="kpi-top">
-          <div class="kpi-icon blue">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m6 5.87a4 4 0 10-8 0m12-8a4 4 0 11-8 0 4 4 0 018 0z"/>
-            </svg>
-          </div>
-          <span class="kpi-badge neutral">— 0%</span>
+          <div class="kpi-icon blue"></div>
+          <span class="kpi-badge neutral">0%</span>
         </div>
         <p class="kpi-label">Total de Associados</p>
         <p class="kpi-value"><%= typeof totalAssociados !== 'undefined' ? totalAssociados : 0 %></p>
-        <p class="kpi-context">Nenhum registo este mês</p>
+        <p class="kpi-context">Nenhum registo este mes</p>
       </div>
-
       <div class="kpi-card teal">
         <div class="kpi-top">
-          <div class="kpi-icon teal">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <span class="kpi-badge neutral">— 0%</span>
+          <div class="kpi-icon teal"></div>
+          <span class="kpi-badge neutral">0%</span>
         </div>
         <p class="kpi-label">Quotas Pagas</p>
         <p class="kpi-value"><%= typeof totalQuotas !== 'undefined' ? totalQuotas : 0 %></p>
         <p class="kpi-context">Sem pagamentos registados</p>
       </div>
-
       <div class="kpi-card amber">
         <div class="kpi-top">
-          <div class="kpi-icon amber">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <span class="kpi-badge neutral">— 0%</span>
+          <div class="kpi-icon amber"></div>
+          <span class="kpi-badge neutral">0%</span>
         </div>
         <p class="kpi-label">Atividades</p>
         <p class="kpi-value"><%= typeof totalAtividades !== 'undefined' ? totalAtividades : 0 %></p>
         <p class="kpi-context">Nenhuma atividade agendada</p>
       </div>
-
       <div class="kpi-card maroon">
         <div class="kpi-top">
-          <div class="kpi-icon maroon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-          </div>
+          <div class="kpi-icon maroon"></div>
           <span class="kpi-badge info"><%= typeof totalUtilizadores !== 'undefined' ? totalUtilizadores : 0 %> ativos</span>
         </div>
         <p class="kpi-label">Utilizadores</p>
         <p class="kpi-value"><%= typeof totalUtilizadores !== 'undefined' ? totalUtilizadores : 0 %></p>
-        <p class="kpi-context">Todos com acesso atribuído</p>
+        <p class="kpi-context">Todos com acesso atribuido</p>
       </div>
     </div>
-
-    <!-- ACESSO RÁPIDO -->
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
-      <h2 class="card-title">Acesso Rápido</h2>
-      <span style="font-size:12.5px; color:var(--clr-muted);">Atalhos para as áreas principais</span>
+      <h2 class="card-title">Acesso Rapido</h2>
+      <span style="font-size:12.5px; color:var(--clr-muted);">Atalhos para as areas principais</span>
     </div>
-
     <div class="quick-links">
       <a href="/associados" class="quick-link">
-        <div class="quick-link-icon" style="background:#EFF6FF; color:#3B82F6;">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m6 5.87a4 4 0 10-8 0m12-8a4 4 0 11-8 0 4 4 0 018 0z"/>
-          </svg>
-        </div>
+        <div class="quick-link-icon" style="background:#EFF6FF; color:#3B82F6;"></div>
         <div class="quick-link-text">
-          <strong>Gestão de Associados</strong>
+          <strong>Gestao de Associados</strong>
           <span>Ver e gerir associados</span>
         </div>
-        <div class="quick-link-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-        </div>
+        <div class="quick-link-arrow">→</div>
       </a>
-
       <a href="/financeiro" class="quick-link">
-        <div class="quick-link-icon" style="background:#ECFDF5; color:#2E7D5B;">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-          </svg>
-        </div>
+        <div class="quick-link-icon" style="background:#ECFDF5; color:#2E7D5B;"></div>
         <div class="quick-link-text">
           <strong>Controlo Financeiro</strong>
           <span>Recibos e pagamentos</span>
         </div>
-        <div class="quick-link-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-        </div>
+        <div class="quick-link-arrow">→</div>
       </a>
-
       <a href="/quotas" class="quick-link">
-        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
+        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;"></div>
         <div class="quick-link-text">
-          <strong>Gestão de Quotas</strong>
+          <strong>Gestao de Quotas</strong>
           <span>Ver e gerir quotas</span>
         </div>
-        <div class="quick-link-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-        </div>
+        <div class="quick-link-arrow">→</div>
       </a>
-
       <a href="/atividades" class="quick-link">
-        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-        </div>
+        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;"></div>
         <div class="quick-link-text">
-          <strong>Gestão de Atividades</strong>
+          <strong>Gestao de Atividades</strong>
           <span>Ver e gerir atividades</span>
         </div>
-        <div class="quick-link-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-        </div>
+        <div class="quick-link-arrow">→</div>
       </a>
-
       <a href="/utilizadores" class="quick-link">
-        <div class="quick-link-icon" style="background:#FFF1F2; color:#7A1F2B;">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A9 9 0 0112 15a9 9 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-          </svg>
-        </div>
+        <div class="quick-link-icon" style="background:#FFF1F2; color:#7A1F2B;"></div>
         <div class="quick-link-text">
-          <strong>Gestão de Utilizadores</strong>
+          <strong>Gestao de Utilizadores</strong>
           <span>Ver e gerir utilizadores</span>
         </div>
-        <div class="quick-link-arrow">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-        </div>
+        <div class="quick-link-arrow">→</div>
       </a>
     </div>
   </main>
-
+</body>
+</html>
+ENDFICHEIROcat > views/dashboard/index.ejs << 'ENDFICHEIRO'
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGA - Dashboard</title>
+  <link rel="stylesheet" href="/css/siga-shared.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
+      </div>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestao de Associados</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link active">Dashboard</a>
+      <a href="/associados" class="nav-link">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link">Utilizadores</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/auth/logout">Sair</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Visao Geral</p>
+        <h1 class="page-title">Dashboard</h1>
+        <p class="page-subtitle">Bem-vindo de volta, <%= locals.utilizador ? locals.utilizador.nome : 'Utilizador' %>.</p>
+      </div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card blue">
+        <div class="kpi-top">
+          <div class="kpi-icon blue"></div>
+          <span class="kpi-badge neutral">0%</span>
+        </div>
+        <p class="kpi-label">Total de Associados</p>
+        <p class="kpi-value"><%= typeof totalAssociados !== 'undefined' ? totalAssociados : 0 %></p>
+        <p class="kpi-context">Nenhum registo este mes</p>
+      </div>
+      <div class="kpi-card teal">
+        <div class="kpi-top">
+          <div class="kpi-icon teal"></div>
+          <span class="kpi-badge neutral">0%</span>
+        </div>
+        <p class="kpi-label">Quotas Pagas</p>
+        <p class="kpi-value"><%= typeof totalQuotas !== 'undefined' ? totalQuotas : 0 %></p>
+        <p class="kpi-context">Sem pagamentos registados</p>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-top">
+          <div class="kpi-icon amber"></div>
+          <span class="kpi-badge neutral">0%</span>
+        </div>
+        <p class="kpi-label">Atividades</p>
+        <p class="kpi-value"><%= typeof totalAtividades !== 'undefined' ? totalAtividades : 0 %></p>
+        <p class="kpi-context">Nenhuma atividade agendada</p>
+      </div>
+      <div class="kpi-card maroon">
+        <div class="kpi-top">
+          <div class="kpi-icon maroon"></div>
+          <span class="kpi-badge info"><%= typeof totalUtilizadores !== 'undefined' ? totalUtilizadores : 0 %> ativos</span>
+        </div>
+        <p class="kpi-label">Utilizadores</p>
+        <p class="kpi-value"><%= typeof totalUtilizadores !== 'undefined' ? totalUtilizadores : 0 %></p>
+        <p class="kpi-context">Todos com acesso atribuido</p>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+      <h2 class="card-title">Acesso Rapido</h2>
+      <span style="font-size:12.5px; color:var(--clr-muted);">Atalhos para as areas principais</span>
+    </div>
+    <div class="quick-links">
+      <a href="/associados" class="quick-link">
+        <div class="quick-link-icon" style="background:#EFF6FF; color:#3B82F6;"></div>
+        <div class="quick-link-text">
+          <strong>Gestao de Associados</strong>
+          <span>Ver e gerir associados</span>
+        </div>
+        <div class="quick-link-arrow">→</div>
+      </a>
+      <a href="/financeiro" class="quick-link">
+        <div class="quick-link-icon" style="background:#ECFDF5; color:#2E7D5B;"></div>
+        <div class="quick-link-text">
+          <strong>Controlo Financeiro</strong>
+          <span>Recibos e pagamentos</span>
+        </div>
+        <div class="quick-link-arrow">→</div>
+      </a>
+      <a href="/quotas" class="quick-link">
+        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;"></div>
+        <div class="quick-link-text">
+          <strong>Gestao de Quotas</strong>
+          <span>Ver e gerir quotas</span>
+        </div>
+        <div class="quick-link-arrow">→</div>
+      </a>
+      <a href="/atividades" class="quick-link">
+        <div class="quick-link-icon" style="background:#FFFBEB; color:#D97706;"></div>
+        <div class="quick-link-text">
+          <strong>Gestao de Atividades</strong>
+          <span>Ver e gerir atividades</span>
+        </div>
+        <div class="quick-link-arrow">→</div>
+      </a>
+      <a href="/utilizadores" class="quick-link">
+        <div class="quick-link-icon" style="background:#FFF1F2; color:#7A1F2B;"></div>
+        <div class="quick-link-text">
+          <strong>Gestao de Utilizadores</strong>
+          <span>Ver e gerir utilizadores</span>
+        </div>
+        <div class="quick-link-arrow">→</div>
+      </a>
+    </div>
+  </main>
 </body>
 </html>
