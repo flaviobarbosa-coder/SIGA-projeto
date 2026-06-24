@@ -11,21 +11,22 @@ const Pagamento = sequelize.define('pagamentos', {
     type: DataTypes.INTEGER,
     allowNull: true
   },
-  tipo_pagamento: {
-    type: DataTypes.ENUM('quota', 'inscricao', 'outro'),
-    allowNull: false
+  tipo: {
+    type: DataTypes.ENUM('quota', 'atividade'),
+    allowNull: false,
+    defaultValue: 'quota'
   },
   valor: {
     type: DataTypes.DECIMAL(10,2),
     allowNull: false
   },
+  estado: {
+    type: DataTypes.ENUM('pendente', 'confirmado', 'rejeitado'),
+    defaultValue: 'pendente'
+  },
   data_pagamento: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW
-  },
-  estado: {
-    type: DataTypes.ENUM('pago', 'pendente', 'cancelado'),
-    defaultValue: 'pago'
   }
 }, { timestamps: false });
 

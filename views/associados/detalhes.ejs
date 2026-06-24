@@ -2,42 +2,124 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <title>Detalhes do Associado</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGA - Detalhes do Associado</title>
+  <link rel="stylesheet" href="/css/siga-shared.css">
 </head>
 <body>
-<div class="container mt-5">
-  <h2>Detalhes do Associado</h2>
-
-  <div class="card mt-3">
-    <div class="card-body">
-      <h5 class="card-title"><%= associado.nome %></h5>
-      <p><strong>Tipo:</strong> <%= associado.tipo %></p>
-      <p><strong>Email:</strong> <%= associado.email %></p>
-      <p><strong>Telefone:</strong> <%= associado.telefone || '-' %></p>
-      <p><strong>NIF:</strong> <%= associado.nif || '-' %></p>
-      <p><strong>Morada:</strong> <%= associado.morada || '-' %></p>
-      <p><strong>Estado:</strong> 
-        <span class="badge 
-          <%= associado.estado === 'aprovada' ? 'bg-success' : 
-              associado.estado === 'rejeitada' ? 'bg-danger' : 
-              associado.estado === 'activo' ? 'bg-primary' : 'bg-warning' %>">
-          <%= associado.estado %>
-        </span>
-      </p>
-      <p><strong>Data de Candidatura:</strong> <%= associado.data_criacao %></p>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
+      </div>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestao de Associados</span>
+      </div>
     </div>
-  </div>
-
-  <div class="mt-3">
-    <form action="/associados/aprovar/<%= associado.id %>" method="POST" style="display:inline">
-      <button class="btn btn-success">Aprovar</button>
-    </form>
-    <form action="/associados/rejeitar/<%= associado.id %>" method="POST" style="display:inline">
-      <button class="btn btn-danger">Rejeitar</button>
-    </form>
-    <a href="/associados/lista" class="btn btn-secondary">Voltar à Lista</a>
-  </div>
-</div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/associados/lista" class="nav-link active">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link">Utilizadores</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/auth/logout">Sair</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Associados</p>
+        <h1 class="page-title">Detalhes do Associado</h1>
+        <p class="page-subtitle">Informacoes completas do associado selecionado.</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="/associados/lista" class="btn btn-outline">← Voltar</a>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Dados Pessoais</h2>
+        </div>
+        <div class="card-body">
+          <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+            <div class="avatar" style="background:var(--clr-maroon); width:56px; height:56px; font-size:22px;">
+              <%= associado.nome.charAt(0).toUpperCase() %>
+            </div>
+            <div>
+              <p style="font-weight:700; font-size:17px; margin:0;"><%= associado.nome %></p>
+              <p style="font-size:13px; color:var(--clr-muted); margin:0;"><%= associado.email %></p>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--clr-border);">
+              <span style="font-size:13px; color:var(--clr-muted);">Tipo</span>
+              <span style="font-size:13px; font-weight:600;"><%= associado.tipo %></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--clr-border);">
+              <span style="font-size:13px; color:var(--clr-muted);">Telefone</span>
+              <span style="font-size:13px; font-weight:600;"><%= associado.telefone || '---' %></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--clr-border);">
+              <span style="font-size:13px; color:var(--clr-muted);">NIF</span>
+              <span style="font-size:13px; font-weight:600;"><%= associado.nif || '---' %></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--clr-border);">
+              <span style="font-size:13px; color:var(--clr-muted);">Morada</span>
+              <span style="font-size:13px; font-weight:600;"><%= associado.morada || '---' %></span>
+            </div>
+            <div style="display:flex; justify-content:space-between; padding:10px 0;">
+              <span style="font-size:13px; color:var(--clr-muted);">Estado</span>
+              <% if (associado.estado === 'activo' || associado.estado === 'aprovada') { %>
+                <span class="badge badge-green">Ativo</span>
+              <% } else if (associado.estado === 'submetida' || associado.estado === 'em_analise') { %>
+                <span class="badge badge-yellow">Em Analise</span>
+              <% } else if (associado.estado === 'rejeitada') { %>
+                <span class="badge badge-red">Rejeitado</span>
+              <% } else { %>
+                <span class="badge badge-gray"><%= associado.estado %></span>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Acoes</h2>
+        </div>
+        <div class="card-body" style="display:flex; flex-direction:column; gap:12px;">
+          <% if (associado.estado === 'submetida' || associado.estado === 'em_analise') { %>
+            <form action="/associados/aprovar/<%= associado.id %>" method="POST">
+              <button type="submit" class="btn btn-primary" style="width:100%;">
+                Aprovar Candidatura
+              </button>
+            </form>
+            <form action="/associados/rejeitar/<%= associado.id %>" method="POST">
+              <button type="submit" class="btn btn-outline" style="width:100%; color:#B91C1C; border-color:#B91C1C;">
+                Rejeitar Candidatura
+              </button>
+            </form>
+          <% } else if (associado.estado === 'aprovada' || associado.estado === 'activo') { %>
+            <div style="background:#ECFDF5; color:#2E7D5B; padding:14px 16px; border-radius:8px; font-size:13.5px; text-align:center;">
+              Candidatura ja aprovada
+            </div>
+          <% } else if (associado.estado === 'rejeitada') { %>
+            <div style="background:#FEF2F2; color:#B91C1C; padding:14px 16px; border-radius:8px; font-size:13.5px; text-align:center;">
+              Candidatura rejeitada
+            </div>
+          <% } %>
+          <a href="/associados/lista" class="btn btn-outline" style="width:100%; text-align:center;">
+            Voltar a Lista
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

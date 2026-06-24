@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers/associadosController');
 
+// Redireciona /associados para a lista
+router.get('/', (req, res) => res.redirect('/associados/lista'));
+
 // Formulário de candidatura
 router.get('/formulario', ctrl.formulario);
 

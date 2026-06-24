@@ -1,5 +1,7 @@
 const Utilizador = require('../models/Utilizador');
 const bcrypt = require('bcryptjs');
+const { QueryTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
 exports.listar = async (req, res) => {
   try {
@@ -80,10 +82,10 @@ exports.recuperarPassword = async (req, res) => {
       return res.redirect('/utilizadores/recuperar-password');
     }
     const hash = await bcrypt.hash(nova_password, 10);
-    await utilizador.update({ 
-      password: hash, 
+    await utilizador.update({
+      password: hash,
       estado: 'ativo',
-      tentativas_login: 0 
+      tentativas_login: 0
     });
     req.flash('sucesso', 'Password redefinida com sucesso!');
     res.redirect('/utilizadores');
@@ -95,8 +97,6 @@ exports.recuperarPassword = async (req, res) => {
 
 exports.logAuditoria = async (req, res) => {
   try {
-    const { QueryTypes } = require('sequelize');
-    const sequelize = require('../config/database');
     const logs = await sequelize.query(
       'SELECT * FROM log_auditoria ORDER BY data_hora DESC',
       { type: QueryTypes.SELECT }
@@ -109,10 +109,8 @@ exports.logAuditoria = async (req, res) => {
 
 exports.registarLog = async (utilizador_id, acao, ip) => {
   try {
-    const { QueryTypes } = require('sequelize');
-    const sequelize = require('../config/database');
     await sequelize.query(
-      'INSERT INTO log_auditoria (id_utilizador, acao, ip) VALUES (?, ?, ?)',
+      'INSERT INTO log_auditoria (utilizador_id, acao, ip) VALUES (?, ?, ?)',
       {
         replacements: [utilizador_id, acao, ip],
         type: QueryTypes.INSERT

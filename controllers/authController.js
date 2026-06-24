@@ -1,5 +1,7 @@
 const Utilizador = require('../models/Utilizador');
 const bcrypt = require('bcryptjs');
+const { QueryTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
 exports.mostrarLogin = (req, res) => {
   res.render('auth/login', {
@@ -33,6 +35,13 @@ exports.fazerLogin = async (req, res) => {
       return res.redirect('/auth/login');
     }
     await utilizador.update({ tentativas_login: 0 });
+    await sequelize.query(
+      'INSERT INTO log_auditoria (utilizador_id, acao, ip) VALUES (?, ?, ?)',
+      {
+        replacements: [utilizador.id, 'Login no sistema', req.ip],
+        type: QueryTypes.INSERT
+      }
+    );
     req.session.utilizador = {
       id: utilizador.id,
       nome: utilizador.nome,
@@ -40,13 +49,13 @@ exports.fazerLogin = async (req, res) => {
       perfil: utilizador.perfil
     };
     switch (utilizador.perfil) {
-      case 'admin': return res.redirect('/dashboard');
-      case 'gestor_associados': return res.redirect('/dashboard');
-      case 'gestor_financeiro': return res.redirect('/dashboard');
-      case 'gestor_atividades': return res.redirect('/dashboard');
+      case 'admin': return res.redirect('/utilizadores');
+      case 'gestor_associados': return res.redirect('/associados');
+      case 'gestor_financeiro': return res.redirect('/financeiro');
+      case 'gestor_atividades': return res.redirect('/atividades');
       case 'direcao': return res.redirect('/dashboard');
-      case 'associado': return res.redirect('/dashboard');
-      default: return res.redirect('/dashboard');
+      case 'associado': return res.redirect('/associados/portal');
+      default: return res.redirect('/');
     }
   } catch (err) {
     console.error('ERRO:', err.message);
