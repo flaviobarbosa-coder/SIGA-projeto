@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGA - Novo Pagamento</title>
+  <link rel="stylesheet" href="/css/siga-shared.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
+      </div>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestao de Associados</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/associados" class="nav-link">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link active">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link">Utilizadores</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/auth/logout">Sair</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Financeiro</p>
+        <h1 class="page-title">Novo Pagamento</h1>
+        <p class="page-subtitle">Registe um novo pagamento.</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="/financeiro/pagamentos" class="btn btn-outline">← Voltar</a>
+      </div>
+    </div>
+    <div class="card" style="max-width:520px;">
+      <div class="card-body">
+        <form action="/financeiro/pagamentos/criar" method="POST">
+          <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">ID do Associado</label>
+            <input type="number" name="associado_id" required
+              style="width:100%; padding:9px 12px; border:1px solid var(--clr-border); border-radius:7px; font-size:13.5px; outline:none;">
+          </div>
+          <div style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Tipo de Pagamento</label>
+            <select name="tipo_pagamento" required
+              style="width:100%; padding:9px 12px; border:1px solid var(--clr-border); border-radius:7px; font-size:13.5px; outline:none; background:white;">
+              <option value="quota">Quota</option>
+              <option value="inscricao">Inscricao</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+          <div style="margin-bottom:24px;">
+            <label style="display:block; font-size:13px; font-weight:600; margin-bottom:6px;">Valor (CVE)</label>
+            <input type="number" name="valor" step="0.01" required
+              style="width:100%; padding:9px 12px; border:1px solid var(--clr-border); border-radius:7px; font-size:13.5px; outline:none;">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            Registar Pagamento
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

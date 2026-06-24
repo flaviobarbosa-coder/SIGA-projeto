@@ -2,47 +2,79 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIGA - Recibos</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/siga-shared.css">
 </head>
 <body>
-  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
-    <div class="container">
-      <span class="navbar-brand">SIGA - Recibos</span>
-      <a href="/financeiro" class="btn btn-outline-light btn-sm">Voltar</a>
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
+      </div>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestao de Associados</span>
+      </div>
     </div>
-  </nav>
-
-  <div class="container mt-4">
-    <h5 class="mb-3">Lista de Recibos Emitidos</h5>
-
-    <table class="table table-bordered table-hover">
-      <thead style="background-color: #8B0000; color: white;">
-        <tr>
-          <th>#</th>
-          <th>Numero do Recibo</th>
-          <th>ID Pagamento</th>
-          <th>Valor</th>
-          <th>Data de Emissao</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if (recibos.length === 0) { %>
-          <tr>
-            <td colspan="5" class="text-center text-muted">Ainda nao ha recibos emitidos</td>
-          </tr>
-        <% } %>
-        <% recibos.forEach(r => { %>
-          <tr>
-            <td><%= r.id %></td>
-            <td><%= r.numero_recibo %></td>
-            <td><%= r.pagamento_id %></td>
-            <td><%= r.valor %> Esc</td>
-            <td><%= new Date(r.data_emissao).toLocaleDateString('pt-PT') %></td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/associados" class="nav-link">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link active">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link">Utilizadores</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/auth/logout">Sair</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Financeiro</p>
+        <h1 class="page-title">Recibos</h1>
+        <p class="page-subtitle">Consulte os recibos emitidos.</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="/financeiro" class="btn btn-outline">← Voltar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Lista de Recibos</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Numero</th>
+              <th>ID Pagamento</th>
+              <th>Valor</th>
+              <th>Data Emissao</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (typeof recibos !== 'undefined' && recibos.length > 0) { %>
+              <% recibos.forEach(function(r) { %>
+                <tr>
+                  <td><strong><%= r.numero_recibo || '---' %></strong></td>
+                  <td><%= r.pagamento_id || '---' %></td>
+                  <td><%= r.valor || 0 %> CVE</td>
+                  <td><%= r.data_emissao || '---' %></td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="4" style="text-align:center; color:#888; padding:30px;">Nenhum recibo emitido</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

@@ -2,86 +2,90 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIGA - Pagamentos</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/siga-shared.css">
 </head>
 <body>
-  <nav class="navbar navbar-dark" style="background-color: #8B0000;">
-    <div class="container">
-      <span class="navbar-brand">SIGA - Pagamentos</span>
-      <a href="/financeiro" class="btn btn-outline-light btn-sm">Voltar</a>
-    </div>
-  </nav>
-
-  <div class="container mt-4">
-
-    <div class="card mb-4">
-      <div class="card-header text-white" style="background-color: #8B0000;">
-        Registar Novo Pagamento
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 21V7l9-4 9 4v14M9 21V12h6v9"/>
+        </svg>
       </div>
-      <div class="card-body">
-        <form action="/financeiro/pagamentos/criar" method="POST">
-          <div class="row g-3">
-            <div class="col-md-3">
-              <label class="form-label">ID do Associado</label>
-              <input type="number" name="associado_id" class="form-control" required>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Tipo de Pagamento</label>
-              <select name="tipo_pagamento" class="form-select" required>
-                <option value="quota">Quota</option>
-                <option value="inscricao">Inscricao em Atividade</option>
-                <option value="outro">Outro</option>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <label class="form-label">Valor</label>
-              <input type="number" step="0.01" name="valor" class="form-control" required>
-            </div>
-            <div class="col-md-3 d-flex align-items-end">
-              <button type="submit" class="btn w-100 text-white" style="background-color: #8B0000;">
-                Registar Pagamento
-              </button>
-            </div>
-          </div>
-        </form>
+      <div class="sidebar-brand-text">
+        <strong>SIGA</strong>
+        <span>Gestao de Associados</span>
       </div>
     </div>
-
-    <h5 class="mb-3">Lista de Pagamentos</h5>
-    <table class="table table-bordered table-hover">
-      <thead style="background-color: #8B0000; color: white;">
-        <tr>
-          <th>#</th>
-          <th>Associado</th>
-          <th>Tipo</th>
-          <th>Valor</th>
-          <th>Estado</th>
-          <th>Data</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if (pagamentos.length === 0) { %>
-          <tr>
-            <td colspan="6" class="text-center text-muted">Ainda nao ha pagamentos registados</td>
-          </tr>
-        <% } %>
-        <% pagamentos.forEach(p => { %>
-          <tr>
-            <td><%= p.id %></td>
-            <td><%= p.associado_id %></td>
-            <td><%= p.tipo_pagamento %></td>
-            <td><%= p.valor %> Esc</td>
-            <td>
-              <span class="badge bg-<%= p.estado === 'pago' ? 'success' : (p.estado === 'pendente' ? 'warning' : 'danger') %>">
-                <%= p.estado %>
-              </span>
-            </td>
-            <td><%= new Date(p.data_pagamento).toLocaleDateString('pt-PT') %></td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  </div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-link">Dashboard</a>
+      <a href="/associados" class="nav-link">Associados</a>
+      <a href="/quotas" class="nav-link">Quotas</a>
+      <a href="/financeiro" class="nav-link active">Financeiro</a>
+      <a href="/atividades" class="nav-link">Atividades</a>
+      <a href="/utilizadores" class="nav-link">Utilizadores</a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="/auth/logout">Sair</a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="page-header">
+      <div>
+        <p class="page-eyebrow">Financeiro</p>
+        <h1 class="page-title">Pagamentos</h1>
+        <p class="page-subtitle">Consulte e registe pagamentos dos associados.</p>
+      </div>
+      <div class="page-header-actions">
+        <a href="/financeiro/pagamentos/criar" class="btn btn-primary">+ Novo Pagamento</a>
+        <a href="/financeiro" class="btn btn-outline">← Voltar</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Lista de Pagamentos</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Associado</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (typeof pagamentos !== 'undefined' && pagamentos.length > 0) { %>
+              <% pagamentos.forEach(function(p) { %>
+                <tr>
+                  <td><%= p.associado_id || '---' %></td>
+                  <td><%= p.tipo_pagamento || '---' %></td>
+                  <td><%= p.valor || 0 %> CVE</td>
+                  <td><%= p.data_pagamento || '---' %></td>
+                  <td>
+                    <% if (p.estado === 'pago') { %>
+                      <span class="badge badge-green">Pago</span>
+                    <% } else if (p.estado === 'pendente') { %>
+                      <span class="badge badge-yellow">Pendente</span>
+                    <% } else { %>
+                      <span class="badge badge-red">Cancelado</span>
+                    <% } %>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="5" style="text-align:center; color:#888; padding:30px;">Nenhum pagamento registado</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
 </body>
 </html>

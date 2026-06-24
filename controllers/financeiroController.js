@@ -25,6 +25,10 @@ exports.listarRecibos = async (req, res) => {
     }
 };
 
+exports.mostrarCriarPagamento = (req, res) => {
+    res.render('financeiro/criar-pagamento');
+};
+
 exports.criarPagamento = async (req, res) => {
     try {
         const pagamento = await Pagamento.create({
